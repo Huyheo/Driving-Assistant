@@ -188,8 +188,6 @@ class MainActivity : AppCompatActivity(), CvCameraViewListener2, ScreenInterface
             @Suppress("DEPRECATION")
             display.getMetrics(displayMetrics)
         }
-//        displayMetrics = DisplayMetrics()
-//        windowManager.defaultDisplay.getMetrics(displayMetrics)
     }
 
     override fun onCameraViewStarted(w: Int, h: Int) {
@@ -265,11 +263,11 @@ class MainActivity : AppCompatActivity(), CvCameraViewListener2, ScreenInterface
                     circleVec[1]
                 )
                 val radius = circleVec[2].toInt()
-                val `val` = radius * 2 + 20
+                val rectSideVal = radius * 2 + 20
                 // defines the ROI
                 signRegion = Rect(
                     (center.x - radius - 10).toInt(),
-                    (center.y - radius - 10).toInt(), `val`, `val`
+                    (center.y - radius - 10).toInt(), rectSideVal, rectSideVal
                 )
                 if (!newSignFlag) {
                     analyzeObject(inputFrame.rgba(), signRegion, radius)
@@ -453,50 +451,50 @@ class MainActivity : AppCompatActivity(), CvCameraViewListener2, ScreenInterface
         }
     }
 
-    private fun setUISign(`val`: String) {
+    private fun setUISign(signVal: String) {
         curSpeedVal = signUiRunnable.signVal
-        when {
-            `val`.contains("10") -> {
-                signUiRunnable.signVal = 10
-            }
-            `val`.contains("20") -> {
-                signUiRunnable.signVal = 20
-            }
-            `val`.contains("30") -> {
-                signUiRunnable.signVal = 30
-            }
-            `val`.contains("40") -> {
-                signUiRunnable.signVal = 40
-            }
-            `val`.contains("50") -> {
-                signUiRunnable.signVal = 50
-            }
-            `val`.contains("60") -> {
-                signUiRunnable.signVal = 60
-            }
-            `val`.contains("70") -> {
-                signUiRunnable.signVal = 70
-            }
-            `val`.contains("80") -> {
-                signUiRunnable.signVal = 80
-            }
-            `val`.contains("90") -> {
-                signUiRunnable.signVal = 90
-            }
-            `val`.contains("100") -> {
-                signUiRunnable.signVal = 100
-            }
-            `val`.contains("110") -> {
-                signUiRunnable.signVal = 110
-            }
-            `val`.contains("120") -> {
-                signUiRunnable.signVal = 120
-            }
-        }
-        Log.i(
-            TAG,
-            "setUISign:" + curSpeedVal + " -------------------------------" + signUiRunnable.signVal
-        )
+        try {
+            signUiRunnable.signVal = signVal.replace("[\\D]".toRegex(), "").toInt()
+        } catch (ignored: Exception) {}
+//        when {
+//            signVal.contains("10") -> {
+//                signUiRunnable.signVal = 10
+//            }
+//            signVal.contains("20") -> {
+//                signUiRunnable.signVal = 20
+//            }
+//            signVal.contains("30") -> {
+//                signUiRunnable.signVal = 30
+//            }
+//            signVal.contains("40") -> {
+//                signUiRunnable.signVal = 40
+//            }
+//            signVal.contains("50") -> {
+//                signUiRunnable.signVal = 50
+//            }
+//            signVal.contains("60") -> {
+//                signUiRunnable.signVal = 60
+//            }
+//            signVal.contains("70") -> {
+//                signUiRunnable.signVal = 70
+//            }
+//            signVal.contains("80") -> {
+//                signUiRunnable.signVal = 80
+//            }
+//            signVal.contains("90") -> {
+//                signUiRunnable.signVal = 90
+//            }
+//            signVal.contains("100") -> {
+//                signUiRunnable.signVal = 100
+//            }
+//            signVal.contains("110") -> {
+//                signUiRunnable.signVal = 110
+//            }
+//            signVal.contains("120") -> {
+//                signUiRunnable.signVal = 120
+//            }
+//        }
+        Log.i(TAG, "setUISign:" + curSpeedVal + " -------------------------------" + signUiRunnable.signVal)
         if (curSpeedVal != signUiRunnable.signVal) {
             ttsSpeed.speak(
                 signUiRunnable.signVal.toString() + " kilometers per hour",

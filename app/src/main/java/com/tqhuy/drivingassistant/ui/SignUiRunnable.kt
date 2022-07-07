@@ -12,8 +12,8 @@ class SignUiRunnable : Runnable {
         signVal = 0
     }
 
-    constructor(`val`: Int, imageView: ImageView?) {
-        signVal = `val`
+    constructor(signVal: Int, imageView: ImageView?) {
+        this.signVal = signVal
         setSignImageView(imageView)
     }
 
