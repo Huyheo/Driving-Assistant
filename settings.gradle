@@ -1,0 +1,5 @@
+rootProject.name = "Driving Assistant"
+include ':app'
+def openCvSdk = './OpenCV-android-sdk'
+include ':openCVLibrary3416'
+project(':openCVLibrary3416').projectDir = new File(openCvSdk + '/sdk')
