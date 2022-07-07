@@ -245,15 +245,15 @@ class MainActivity : AppCompatActivity(), CvCameraViewListener2, ScreenInterface
         Imgproc.Canny(mask, mEdges, 50.0, 150.0)
         Imgproc.resize(mEdges, mNew, Size(imgWidth.toDouble(), imgHeight.toDouble()))
         Imgproc.HoughCircles(
-            mGray,
-            circles,
-            Imgproc.CV_HOUGH_GRADIENT,
-            2.0,
-            1000.0,
-            175.0,
-            120.0,
-            25,
-            125
+            mGray,//Input image (grayscale).
+            circles,//A vector that stores sets of 3 values: xc,yc,r for each detected circle.
+            Imgproc.CV_HOUGH_GRADIENT,//Define the detection method. Currently this is the only one available in OpenCV.
+            2.0,//The inverse ratio of resolution.
+            1000.0,//Minimum distance between detected centers.
+            175.0,//Upper threshold for the internal Canny edge detector.
+            120.0,//Threshold for center detection.
+            25,//Minimum radius to be detected. If unknown, put zero as default.
+            125//Maximum radius to be detected. If unknown, put zero as default.
         )
         if (circles.cols() > 0) {
             for (x in 0 until min(circles.cols(), 5)) {
