@@ -495,7 +495,7 @@ class MainActivity : AppCompatActivity(), CvCameraViewListener2, ScreenInterface
 //            }
 //        }
         Log.i(TAG, "setUISign:" + curSpeedVal + " -------------------------------" + signUiRunnable.signVal)
-        if (curSpeedVal != signUiRunnable.signVal) {
+        if (curSpeedVal != signUiRunnable.signVal && signUiRunnable.signVal in 10..120 step 10) {
             ttsSpeed.speak(
                 signUiRunnable.signVal.toString() + " kilometers per hour",
                 TextToSpeech.QUEUE_FLUSH,
