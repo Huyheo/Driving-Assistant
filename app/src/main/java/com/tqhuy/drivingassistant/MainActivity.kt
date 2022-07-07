@@ -188,8 +188,6 @@ class MainActivity : AppCompatActivity(), CvCameraViewListener2, ScreenInterface
             @Suppress("DEPRECATION")
             display.getMetrics(displayMetrics)
         }
-//        displayMetrics = DisplayMetrics()
-//        windowManager.defaultDisplay.getMetrics(displayMetrics)
     }
 
     override fun onCameraViewStarted(w: Int, h: Int) {
